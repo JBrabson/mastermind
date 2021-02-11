@@ -3,8 +3,10 @@ class CodeGuess
 
   def initialize(combo)
     @combo = combo
-
-
+  end
+#helper method order placement?
+  def input_valid?
+    characters_valid? && length_valid?
   end
 
   def characters_valid?
@@ -17,8 +19,5 @@ class CodeGuess
     @combo.length == 4
   end
 
-  def input_valid?
-    characters_valid? && length_valid?
-  end
 
 end

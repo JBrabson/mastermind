@@ -37,7 +37,7 @@ class CodeGuessTest < Minitest::Test
     assert_equal false, code_guess3.input_valid?
   end
 
-  def test_it_can_randomize
-
-  end
+  # def test_it_can_randomize
+  #
+  # end
 end
