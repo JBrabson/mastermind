@@ -7,33 +7,24 @@ require './lib/evaluator'
 class EvaluatorTest < Minitest::Test
 
   def test_it_exists
-    evaluator = Evaluator.new(["y", "b", "r", "b"], ["y", "y", "b", "g"])
+    evaluator = Evaluator.new(["g", "r", "r", "b"], ["r", "r", "g", "b"])
     assert_instance_of Evaluator, evaluator
   end
 
-  def test_it_can_evaluate_right_color_right_place
+  def test_it_can_evaluate_right_color_right_place_exact_match
   # skip
-  evaluator = Evaluator.new(["y", "b", "r", "b"], ["y", "y", "b", "g"])
-  secret_code = ["y", "b", "r", "b"]
-  guess =       ["y", "y", "b", "g"]
+  evaluator = Evaluator.new(["g", "r", "r", "b"], ["r", "r", "g", "b"])
+  secret_code = ["g", "r", "r", "b"]
+  guess =       ["r", "r", "g", "b"]
 
-  assert_equal 1, evaluator.correct_color_correct_location_count(secret_code, guess)
+  assert_equal 2, evaluator.correct_color_correct_location_count(secret_code, guess)
   end
 
-  def test_it_can_evaluate_right_color_wrong_place
+  def test_it_can_evaluate_right_color_wrong_place_partial_match
   # skip
-  evaluator = Evaluator.new(["y", "b", "r", "b"], ["y", "y", "b", "g"])
-  secret_code = ["y", "b", "r", "b"]
-  guess =       ["y", "y", "b", "g"]
-  assert_equal 2, evaluator.correct_color_count(secret_code, guess)
-  end
-
-  def test_it_can_calculate_partial_match
-  evaluator = Evaluator.new(["y", "b", "r", "b"], ["y", "y", "b", "g"])
-  secret_code = ["y", "b", "r", "b"]
-  guess =       ["y", "y", "b", "g"]
-  evaluator.correct_color_correct_location_count(secret_code, guess)
-  evaluator.correct_color_count(secret_code, guess)
-  assert_equal 1, evaluator.partial_match_count
+  evaluator = Evaluator.new(["g", "r", "r", "b"], ["r", "r", "g", "b"])
+  secret_code = ["g", "r", "r", "b"]
+  guess =       ["r", "r", "g", "b"]
+  assert_equal 3, evaluator.correct_color_count(secret_code, guess)
   end
 end

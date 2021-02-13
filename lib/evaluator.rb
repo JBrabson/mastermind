@@ -20,7 +20,7 @@ class Evaluator
       end
     end
   return @red_peg_exact_match
-end
+  end
 
   def correct_color_count(secret_code, guess)
     secret_code.uniq.each do |color|
@@ -28,10 +28,6 @@ end
       @color_match += 1
     end
   end
-  return @color_match #remeber not to put return in the loop!!!
-end
-
-  def partial_match_count
-    @color_match - @red_peg_exact_match
+  return @color_match
   end
 end
