@@ -13,7 +13,6 @@ class CodeMakerTest < Minitest::Test
   def test_it_creates_code_list
     code = CodeMaker.new(["r", "y", "g", "b"], 4)
     assert_equal 256, code.create_code_list(4).length
-    require "pry"; binding.pry
   end
 
   def test_it_can_change_secret_code
