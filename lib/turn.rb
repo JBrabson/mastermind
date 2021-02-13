@@ -9,5 +9,5 @@ class Turn
   end
 
   def evaluate
-
+  end
 end
