@@ -1,11 +1,13 @@
 class CodeMaker
 
   attr_reader :colors,
-              :number_of_positions
+              :number_of_positions,
+              :secret_code
 
-  def initialize(color)
+  def initialize(colors, number_of_positions)
     @colors = ["r", "y", "g", "b"]
     @number_of_positions = 4
+    @secret_code = []
   end
 
   def create_code_list(number_of_positions)
@@ -13,7 +15,7 @@ class CodeMaker
   end
 
   def secret_code
-    create_code_list(number_of_positions).sample
+    @secret_code = create_code_list(number_of_positions).sample
   end
 
 end
