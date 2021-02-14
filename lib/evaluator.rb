@@ -30,4 +30,10 @@ class Evaluator
   end
   return @color_match
   end
+
+  def add_white_pegs
+    @white_peg_partial_match = (@color_match - @red_peg_exact_match)
+  end
+
+
 end
