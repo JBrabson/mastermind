@@ -1,6 +1,6 @@
 class CodeBreaker
 
-  def initialize(game,guess)
+  def initialize(game.guess)
     @guesses = []
   end
 

@@ -26,8 +26,12 @@ What's your guess?"
     correct color in the secret code, you will be awarded a correct guess. For any color in
     your guess that is also in the same position in the secret code, you will be awarded
     a correct guess. Use the correct guess points to determine the secret code! Now it's your
+<<<<<<< HEAD
     job to break the code and become the new Mastermind! Press (p)lay if you're ready for
     the challenge or (q) to exit the game."
+=======
+    job to break the code and become the new Mastermind!" 
+>>>>>>> main
   end
 
   def quit
