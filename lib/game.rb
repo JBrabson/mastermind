@@ -12,7 +12,7 @@ class Game
 
   def initialize
     @message = Messages.new
-    @secret = CodeMaker.new(colors, number_of_positions).secret_code    # @turn = Turn.new
+    @secret = CodeMaker.new(colors, number_of_positions).secret_code
   end
 
   def start
@@ -29,7 +29,9 @@ class Game
       answer = gets.chomp.downcase
         if answer == "p"
           @message.play
-          turn = Turn.new(answer, @secret)
+          # turn = Turn.new(answer, @secret)
+          turn = Turn.new(@evaluator)
+          evaluator = Evaluator.new(answer, @secret)
           # @guess_array = gets.chomp.downcase
           #   #if answer then evaluate else quit
         elsif answer == "q"
@@ -39,8 +41,9 @@ class Game
         end
     elsif user_input == "p"
       @message.play
-      turn = Turn.new(answer, @secret)
-      # @turn = Turn.new(answer, secret)
+      # turn = Turn.new(answer, @secret)
+      turn = Turn.new(evaluator)
+      evaluator = Evaluator.new(answer, @secret)
     else user_input == "q"
       @message.quit
     end

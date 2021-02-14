@@ -16,7 +16,6 @@ class TurnTest < Minitest::Test
 
   def test_it_exists_and_has_attributes
     assert_instance_of Turn, @turn
-    assert_equal @evaluator, @turn.evaluator
     assert_equal ["r", "g", "b", "y"], @turn.evaluator.secret_code
     assert_equal ["r", "y", "g", "b"], @turn.evaluator.guess
   end
