@@ -1,8 +1,10 @@
+require './lib/game'
+
 class Guess
   attr_reader :guess_array
 
-  def initialize(guess_array)
-    @guess_array = guess_array
+  def initialize(guess)
+    @guess_array = guess
   end
 
   def valid?
@@ -18,4 +20,5 @@ class Guess
   def length_valid?
     @guess_array.length == 4
   end
+
 end

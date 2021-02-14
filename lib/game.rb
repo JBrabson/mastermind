@@ -12,40 +12,57 @@ class Game
 
   def initialize
     @message = Messages.new
-    @secret = CodeMaker.new(colors, number_of_positions).secret_code
+    @secret = CodeMaker.new.secret_code
   end
 
   def start
     @message.start_message
-    user_input = gets.chomp.downcase
+    user_input = get_user_input
 
-    until user_input == "i" || user_input == "p" || user_input == "q"
+    until user_input == ["i"] || user_input == ["p"] || user_input == ["q"]
       @message.input_invalid
-      user_input = gets.chomp.downcase
+      user_input = get_user_input
     end
 
-    if user_input == "i"
+    if user_input == ["i"]
       @message.instructions
-      answer = gets.chomp.downcase
-        if answer == "p"
-          @message.play
-          # turn = Turn.new(answer, @secret)
-          turn = Turn.new(@evaluator)
-          evaluator = Evaluator.new(answer, @secret)
-          # @guess_array = gets.chomp.downcase
-          #   #if answer then evaluate else quit
-        elsif answer == "q"
+      answer = get_user_input
+        if answer == ["p"]
+          play
+        elsif answer == ["q"]
           @message.quit
         else
           @message.input_invalid
         end
-    elsif user_input == "p"
-      @message.play
-      # turn = Turn.new(answer, @secret)
-      turn = Turn.new(evaluator)
-      evaluator = Evaluator.new(answer, @secret)
-    else user_input == "q"
+    elsif user_input == ["p"]
+      play
+    else user_input == ["q"]
       @message.quit
     end
   end
+
+  def play
+    @message.play
+    guess = get_user_input
+    evalguess = Guess.new(guess)
+    # require 'pry'; binding.pry
+      if evalguess.valid?
+        turn = Turn.new(guess, @secret)
+      else
+        if evalguess.characters_valid? == false
+          @message.invalid_characters
+        else evalguess.length_valid? == false
+          if evalguess.guess_array.count < 4
+            @message.too_short
+          else evalguess.guess_array.count > 4
+            @message.too_long
+          end
+        end
+      end
+  end
+
+  def get_user_input
+    gets.chomp.downcase.delete(" ").split("")
+  end
+
 end

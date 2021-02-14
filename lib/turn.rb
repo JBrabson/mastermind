@@ -1,9 +1,10 @@
 class Turn
-  attr_reader :evaluator
+  attr_reader :guess,
+              :secret_code
 
-  def initialize(evaluator)
-    # @guess = guess
-    # @secret_code = secret_code
-    @evaluator = Evaluator.new(@guess, @secret_code)
+  def initialize(guess, secret_code)
+    @guess = guess
+    @secret_code = #how to call on instance variable initialized in game?
+    @evaluator = Evaluator.new
   end
 end

@@ -6,7 +6,7 @@ class Evaluator
               :secret_code,
               :guess
 
-  def initialize(secret_code, guess)
+  def initialize
     @secret_code = [] # add code from code maker
     @guess = [] # add guess from game
     @red_peg_exact_match = 0 #correct color && correct location
