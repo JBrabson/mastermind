@@ -45,4 +45,15 @@ What's your guess?"
       puts messages.sample
   end
 
+  def invalid_characters
+    puts "INVALID CHARACTERS"
+  end
+
+  def too_short
+    puts "TOO SHORT MESSAGE"
+  end
+
+  def too_long
+    puts "TOO LONG"
+  end
 end

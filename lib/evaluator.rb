@@ -2,11 +2,13 @@ class Evaluator
   attr_reader :red_peg_exact_match,
               :white_peg_partial_match,
               :guess_count,
-              :color_match
+              :color_match,
+              :secret_code,
+              :guess
 
-  def initialize(secret_code, guess)
-    @guess = [] # add guess from game
+  def initialize
     @secret_code = [] # add code from code maker
+    @guess = [] # add guess from game
     @red_peg_exact_match = 0 #correct color && correct location
     @white_peg_partial_match = 0 #correct color && incorrect location
     @guess_count = 0 #of "turns"
