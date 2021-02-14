@@ -1,9 +1,9 @@
 class Turn
-  attr_reader :guess,
-              :secret_code
+  attr_reader :evaluator
 
-  def initialize(guess, secret_code)
-    @guess = guess
-    @secret_code = secret_code
+  def initialize(evaluator)
+    # @guess = guess
+    # @secret_code = secret_code
+    @evaluator = Evaluator.new(@guess, @secret_code)
   end
 end
