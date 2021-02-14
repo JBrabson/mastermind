@@ -1,23 +1,21 @@
-class CodeGuess
-  attr_reader :combo
+class Guess
+  attr_reader :guess_array
 
-  def initialize(combo)
-    @combo = combo
+  def initialize(guess_array)
+    @guess_array = guess_array
   end
-#helper method order placement?
-  def input_valid?
+
+  def valid?
     characters_valid? && length_valid?
   end
 
   def characters_valid?
-    @combo.all? do |letter|
+    @guess_array.all? do |letter|
       letter == "r" || letter == "g" || letter == "b" || letter == "y"
     end
   end
 
   def length_valid?
-    @combo.length == 4
+    @guess_array.length == 4
   end
-
-
 end
