@@ -3,7 +3,7 @@ require './lib/code_maker'
 require './lib/evaluator'
 require './lib/guess'
 require './lib/messages'
-# require './lib/turn'
+require './lib/turn'
 
 class Game
   attr_accessor :secret_code
@@ -28,8 +28,8 @@ class Game
       @message.instructions
       answer = gets.chomp.downcase
         if answer == "p"
-          # @secret.secret_code
-          # @message.play
+          @message.play
+          turn = Turn.new(answer, @secret)
           # @guess_array = gets.chomp.downcase
           #   #if answer then evaluate else quit
         elsif answer == "q"
@@ -39,8 +39,7 @@ class Game
         end
     elsif user_input == "p"
       @message.play
-      secret = @secret.secret_code
-      guess = gets.chomp.downcase
+      turn = Turn.new(answer, @secret)
       # @turn = Turn.new(answer, secret)
     else user_input == "q"
       @message.quit
