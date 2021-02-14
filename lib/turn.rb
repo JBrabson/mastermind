@@ -1,9 +1,9 @@
 class Turn
-  attr_reader :turn_guess,
-              :game_hidden_code
+  attr_reader :guess,
+              :secret_code
 
-  def initialize(turn_guess, game_hidden_code)
-    @turn_guess = turn_guess
-    @game_hidden_code = game_hidden_code
+  def initialize(guess, secret_code)
+    @guess = guess
+    @secret_code = secret_code
   end
 end
