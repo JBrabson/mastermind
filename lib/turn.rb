@@ -4,7 +4,10 @@ class Turn
   attr_reader :guess,
               :secret_code,
               :winner,
-              :quit
+              :quit,
+              :red_peg_exact_match,
+              :white_peg_partial_match,
+              :color_match
 
   def initialize(guess, secret_code)
     @guess = guess
@@ -49,20 +52,20 @@ class Turn
 
   def correct_color_correct_location_count(secret_code, guess)
     @secret_code.each_with_index do |color, index|
-      if color == guess[index]
+      if color == @guess[index]
         @red_peg_exact_match += 1
       end
     end
-  return @red_peg_exact_match
+  @red_peg_exact_match
   end
 
   def correct_color_count(secret_code, guess)
     @secret_code.uniq.each do |color|
-      if guess.uniq.include?(color)
+      if @guess.uniq.include?(color)
       @color_match += 1
     end
   end
-  return @color_match
+  @color_match
   end
 
   def add_white_pegs
