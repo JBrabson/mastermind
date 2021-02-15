@@ -46,8 +46,11 @@ class Turn
   end
 
   def result
-    puts "#{@guess} has #{@white_peg_partial_match} of the correct elements with #{@red_peg_exact_match} in the correct positions
-      You've taken #{0} guess"
+    correct_color_correct_location_count(secret_code, guess)
+    correct_color_count(secret_code, guess)
+    add_white_pegs
+    puts "#{@guess.join("").upcase} has #{@white_peg_partial_match} of the correct elements with #{@red_peg_exact_match} in the correct positions
+      You've taken #{@guess_count} guess"
     end
 
   def correct_color_correct_location_count(secret_code, guess)
@@ -56,7 +59,7 @@ class Turn
         @red_peg_exact_match += 1
       end
     end
-  @red_peg_exact_match
+    @red_peg_exact_match
   end
 
   def correct_color_count(secret_code, guess)
