@@ -1,4 +1,5 @@
 require './lib/game'
+require 'time'
 
 class Turn
   attr_reader :guess,
@@ -9,9 +10,10 @@ class Turn
               :white_peg_partial_match,
               :color_match
 
-  def initialize(guess, secret_code)
+  def initialize(guess, secret_code, guess_count)
     @guess = guess
     @secret_code = secret_code
+    @guess_count = guess_count
     @red_peg_exact_match = 0
     @white_peg_partial_match = 0
     @color_match = 0
@@ -38,7 +40,8 @@ class Turn
   end
 
   def winner
-      puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} in TIMER INTERPOLATED HERE.\nDo you want to play again or quit?"
+    # total_play_time = ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - @start_time).to_i / 60)
+      puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in TIME METHOD HERE.\nDo you want to play again or quit?"
       input = gets.chomp.downcase
         if input == "p"
           game = Game.new
