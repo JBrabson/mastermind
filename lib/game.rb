@@ -3,10 +3,9 @@ require './lib/messages'
 require './lib/turn'
 
 class Game
-  attr_accessor :secret_code
-  attr_reader :colors,
-              :number_of_positions,
-              :guess
+  attr_reader :secret_code,
+              :guess,
+              :guess_count
 
   def initialize
     @message = Messages.new
@@ -44,12 +43,12 @@ class Game
   def play
     @message.play
     guess = get_user_input
+    @guess_count +=1
     @turn = Turn.new(guess, @secret_code)
 
     if @turn.valid?
-      @guess_count +=1
-      require "pry"; binding.pry
       @turn.result
+      puts "You've taken #{@guess_count} guesses"
 
     elsif
         @turn.characters_valid? == false
