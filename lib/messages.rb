@@ -56,4 +56,12 @@ What's your guess?"
   def too_long
     puts "TOO LONG"
   end
+
+  def winner
+    puts "YOU ARE THE BOSS"
+  end
+
+  def play_again
+    puts "Do you want to play again?"
+  end
 end
