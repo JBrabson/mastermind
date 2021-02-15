@@ -15,8 +15,8 @@ class Turn
     @red_peg_exact_match = 0
     @white_peg_partial_match = 0
     @color_match = 0
-    @winner = false
     @quit = false
+    @message = Messages.new
   end
 
   def valid?
@@ -39,18 +39,30 @@ class Turn
 
   def winner?
     if @guess == @secret_code
-      @winner = true
-    else
-      @winner
+      true
+      p @message.winner
+      p @message.play_again
+      input = gets.chomp.downcase
+        if input == ["p"]
+          @message.play
+          initialize
+          game.play
+        else input == ["q"]
+          @message.quit
+        end
     end
   end
 
   def result
+    if winner? == true
+
+    else
     correct_color_correct_location_count(secret_code, guess)
     correct_color_count(secret_code, guess)
     add_white_pegs
     puts "#{@guess.join("").upcase} has #{@white_peg_partial_match} of the correct elements with #{@red_peg_exact_match} in the correct positions"
     end
+  end
 
   def correct_color_correct_location_count(secret_code, guess)
     @secret_code.each_with_index do |color, index|
