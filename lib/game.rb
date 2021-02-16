@@ -55,7 +55,7 @@ class Game
       @guess_count +=1
       @turn.result
       p @secret_code.join
-      puts "You've taken #{@guess_count} guesses\nWhat's your next guess?\nFeel like cheating? Press C for the hidden code so you can win (like a cheater)...\nor press Q at any time to quit."
+      puts "You've taken #{@guess_count} guesses\nWhat's your next guess?" "(Or if you feel like cheating, you can press C for the hidden code... and win (like a cheater)...\n(You can also press Q at any time to quit.)"
     elsif
       @turn.characters_valid? == false
       @message.invalid_characters
@@ -66,6 +66,7 @@ class Game
       @turn.too_long? == true
       @message.too_long
     end
+    cheat_or_quit
     play
   end
 
