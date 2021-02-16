@@ -66,8 +66,8 @@ class Game
       @turn.too_long? == true
       @message.too_long
     end
-    cheat_or_quit
     play
+    # cheat_or_quit
   end
 
   def cheat_or_quit
@@ -75,8 +75,10 @@ class Game
       if input == "q"
         @message.quit
         exit
-      else input == "c"
+      elsif input == "c"
         puts "Well, the secret code is '#{@secret_code.join}'. Not very secret anymore. 'GOOD LUCK' guessing the winning code.\nWhat's your next 'guess'?"
+      else
+        play
       end
   end
 
