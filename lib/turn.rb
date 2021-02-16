@@ -1,5 +1,6 @@
+require './lib/code_maker'
+require './lib/messages'
 require './lib/game'
-require 'time'
 
 class Turn
   attr_reader :guess,
@@ -8,17 +9,18 @@ class Turn
               :quit,
               :red_peg_exact_match,
               :white_peg_partial_match,
-              :color_match
+              :color_match,
+              :elapsed_time
 
-  def initialize(guess, secret_code, guess_count)
+  def initialize(guess, secret_code, guess_count, elapsed_time)
     @guess = guess
     @secret_code = secret_code
     @guess_count = guess_count
     @red_peg_exact_match = 0
     @white_peg_partial_match = 0
     @color_match = 0
-    @quit = false
     @message = Messages.new
+    @elapsed_time = elapsed_time
   end
 
   def valid?
@@ -39,14 +41,14 @@ class Turn
     @guess.length < 4
   end
 
+
   def winner
-    # total_play_time = ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - @start_time).to_i / 60)
-      puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in TIME METHOD HERE.\nDo you want to play again or quit?"
+      puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
       input = gets.chomp.downcase
-        if input == "p"
+        if input == "p" || input == "play"
           game = Game.new
           game.start
-        else input == ["q"]
+        else input == "q" || input == "quit"
           @message.quit
           exit
         end
@@ -60,7 +62,7 @@ class Turn
       correct_color_correct_location_count(secret_code, guess)
       correct_color_count(secret_code, guess)
       add_white_pegs
-      puts "#{@guess.join("").upcase} has #{@white_peg_partial_match} of the correct elements with #{@red_peg_exact_match} in the correct positions"
+      puts "#{@guess.join("").upcase} has #{@color_match} of the correct elements with #{@red_peg_exact_match} in the correct positions"
     end
   end
 
