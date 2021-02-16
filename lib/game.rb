@@ -1,21 +1,20 @@
 require './lib/code_maker'
 require './lib/messages'
 require './lib/turn'
-require 'time'
 
 class Game
   attr_reader :secret_code,
               :guess,
               :guess_count,
-              :message
-              # :start_time
+              :message,
+              :elapsed_time
 
   def initialize
     @message = Messages.new
     @secret_code = CodeMaker.new.secret_code
     @guess_count = 0
-
-    # @start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    @start_time = Time.now
+    @end_time = Time.now
   end
 
   def start
@@ -50,12 +49,17 @@ class Game
 
   def play
     guess = get_user_input
-    @turn = Turn.new(guess, @secret_code, @guess_count)
+    elapsed_time = (@end_time - @start_time).round(0).divmod 60
+    @turn = Turn.new(guess, @secret_code, @guess_count, elapsed_time)
     if @turn.valid?
       @guess_count +=1
       @turn.result
+      @end_time = Time.now
       p @secret_code.join
       puts "You've taken #{@guess_count} guesses\nWhat's your next guess?" "(Or if you feel like cheating, you can press C for the hidden code... and win (like a cheater)...\n(You can also press Q at any time to quit.)"
+    elsif
+      guess == ["c"] || guess == ["q"]
+      cheat_or_quit?(guess)
     elsif
       @turn.characters_valid? == false
       @message.invalid_characters
@@ -67,15 +71,14 @@ class Game
       @message.too_long
     end
     play
-    # cheat_or_quit
   end
 
-  def cheat_or_quit
-    input = gets.chomp.downcase
-      if input == "q"
+
+  def cheat_or_quit?(guess)
+      if guess == ["q"]
         @message.quit
         exit
-      elsif input == "c"
+      elsif guess == ["c"]
         puts "Well, the secret code is '#{@secret_code.join}'. Not very secret anymore. 'GOOD LUCK' guessing the winning code.\nWhat's your next 'guess'?"
       else
         play
