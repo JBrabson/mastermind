@@ -7,7 +7,8 @@ class Game
               :guess,
               :guess_count,
               :message,
-              :elapsed_time
+              :elapsed_time,
+              :plural_or_single
 
   def initialize
     @message = Messages.new
@@ -56,10 +57,16 @@ class Game
       @turn.result
       @end_time = Time.now
       p @secret_code.join
-      puts "You've taken #{@guess_count} guesses\nWhat's your next guess?" "(Or if you feel like cheating, you can press C for the hidden code... and win (like a cheater)...\n(You can also press Q at any time to quit.)"
+      puts "You've taken #{@guess_count} #{plural_or_single}.\nWhat's your next guess?" "(Or if you feel like cheating, you can press C for the hidden code... and win (like a cheater)...\n(You can also press Q at any time to quit.)"
     elsif
       guess == ["c"] || guess == ["q"]
       cheat_or_quit?(guess)
+    elsif
+      @turn.too_short? == true && @turn.characters_valid? == false
+      @message.too_short_invalid_character
+    elsif
+      @turn.too_long? == true && @turn.characters_valid? == false
+      @message.too_long_invalid_character
     elsif
       @turn.characters_valid? == false
       @message.invalid_characters
@@ -87,5 +94,13 @@ class Game
 
   def get_user_input
     gets.chomp.downcase.delete(" ").split("")
+  end
+
+  def plural_or_single
+    if @guess_count == 1
+      "guess"
+    else
+      "guesses"
+    end
   end
 end
