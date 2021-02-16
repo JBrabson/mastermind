@@ -1,7 +1,3 @@
-require './lib/code_maker'
-require './lib/messages'
-require './lib/game'
-
 class Turn
   attr_reader :guess,
               :secret_code,
@@ -41,7 +37,6 @@ class Turn
     @guess.length < 4
   end
 
-
   def winner
       puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
       input = gets.chomp.downcase
@@ -78,10 +73,10 @@ class Turn
   def correct_color_count(secret_code, guess)
     @secret_code.uniq.each do |color|
       if @guess.uniq.include?(color)
-      @color_match += 1
+        @color_match += 1
+      end
     end
-  end
-  @color_match
+    @color_match
   end
 
   def add_white_pegs

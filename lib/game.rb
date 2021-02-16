@@ -58,6 +58,9 @@ class Game
       p @secret_code.join
       puts "You've taken #{@guess_count} guesses\nWhat's your next guess?" "(Or if you feel like cheating, you can press C for the hidden code... and win (like a cheater)...\n(You can also press Q at any time to quit.)"
     elsif
+      guess == ["c"] || guess == ["q"]
+      cheat_or_quit?(guess)
+    elsif
       @turn.characters_valid? == false
       @message.invalid_characters
     elsif
@@ -68,18 +71,14 @@ class Game
       @message.too_long
     end
     play
-    cheat_or_quit
   end
 
-  def elapsed_time_calulation
-  end
 
-  def cheat_or_quit
-    input = gets.chomp.downcase
-      if input == "q"
+  def cheat_or_quit?(guess)
+      if guess == ["q"]
         @message.quit
         exit
-      elsif input == "c"
+      elsif guess == ["c"]
         puts "Well, the secret code is '#{@secret_code.join}'. Not very secret anymore. 'GOOD LUCK' guessing the winning code.\nWhat's your next 'guess'?"
       else
         play
