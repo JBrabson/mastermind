@@ -1,7 +1,6 @@
 require './lib/game'
 
 class Messages
-
   def start_message
       puts  '        -------------------------------------------
        |         Welcome to MASTERMIND...          |

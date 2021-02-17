@@ -1,5 +1,4 @@
 class CodeMaker
-
   attr_reader :secret_code
 
   def initialize
@@ -15,5 +14,4 @@ class CodeMaker
   def secret_code
     @secret_code = create_code_list.sample
   end
-
 end
