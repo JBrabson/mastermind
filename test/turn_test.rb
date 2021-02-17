@@ -6,7 +6,6 @@ require './lib/turn'
 require './lib/messages'
 
 class TurnTest < Minitest::Test
-
   def test_it_exists
     turn = Turn.new(["g", "r", "r", "b"], ["r", "r", "g", "b"], 0, Time.now)
     assert_instance_of Turn, turn
@@ -22,7 +21,6 @@ class TurnTest < Minitest::Test
   end
 
   def test_is_correct_length
-    # skip
     turn1 = Turn.new(["r", "g", "b", "y"], ["r", "r", "g", "b"], 0, Time.now)
     turn2 = Turn.new(["r", "g", "b"], ["r", "r", "g", "b"], 0, Time.now)
     turn3 = Turn.new(["r", "g", "b", "y", "y"], ["r", "g", "b", "y"], 0, Time.now)
@@ -34,7 +32,6 @@ class TurnTest < Minitest::Test
   end
 
   def test_turn_is_valid
-    # skip
     turn1 = Turn.new(["r", "g", "x", "y"], ["r", "r", "g", "b"], 0, Time.now)
     turn2 = Turn.new(["r", "g", "b"], ["r", "r", "g", "b"], 0, Time.now)
     turn3 = Turn.new(["r", "g", "b", "y", "y"], ["r", "g", "b", "y"], 0, Time.now)
@@ -43,14 +40,7 @@ class TurnTest < Minitest::Test
     assert_equal false, turn3.valid?
   end
 
-  # def test_it_announces_win
-  #   turn1 = Turn.new(["r", "g", "b", "y"], ["r", "r", "g", "b"], 1, Time.now)
-  #   turn2 = Turn.new(["r", "b", "b", "b"], ["r", "r", "g", "b"], 2, Time.now)
-  #   assert_equal
-  # end
-
   def test_it_can_evaluate_right_color_right_place_exact_match
-  # skip
   turn = Turn.new(["g", "r", "r", "b"], ["r", "r", "g", "b"], 0, Time.now)
   secret_code = ["g", "r", "r", "b"]
   guess =       ["r", "r", "g", "b"]
@@ -58,7 +48,6 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_can_evaluate_right_color_wrong_place_partial_match
-  # skip
   turn = Turn.new(["g", "r", "r", "b"], ["r", "r", "g", "b"], 0, Time.now)
   secret_code = ["g", "r", "r", "b"]
   guess =       ["r", "r", "g", "b"]

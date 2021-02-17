@@ -11,7 +11,7 @@ class Turn
   def initialize(guess, secret_code, guess_count, elapsed_time)
     @guess = guess
     @secret_code = secret_code
-    @guess_count = guess_count
+    @guess_count = (guess_count += 1)
     @red_peg_exact_match = 0
     @white_peg_partial_match = 0
     @color_match = 0
@@ -38,21 +38,24 @@ class Turn
   end
 
   def winner
-      puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
-      input = gets.chomp.downcase
-        if input == "p" || input == "play"
-          game = Game.new
-          game.start
-        else input == "q" || input == "quit"
-          @message.quit
-          exit
-        end
+    puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
+    input = gets.chomp.downcase
+    if input == "p" || input == "play"
+      game = Game.new
+      @start_time
+      @message.play
+      game.play
+    elsif input == "q" || input == "quit"
+      @message.quit
+      exit
+    else
+      exit
+    end
   end
 
   def result
     if @secret_code == @guess
       winner
-
     else
       correct_color_correct_location_count(secret_code, guess)
       correct_color_count(secret_code, guess)
