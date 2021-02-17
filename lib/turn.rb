@@ -39,18 +39,24 @@ class Turn
 
   def winner
     puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
-    input = gets.chomp.downcase
-    if input == "p" || input == "play"
-      game = Game.new
-      @start_time
-      @message.play
-      game.play
-    elsif input == "q" || input == "quit"
+    user_input = gets.chomp.downcase
+    until user_input == "p" || user_input == "q"
+      @message.input_invalid
+      user_input = gets.chomp.downcase
+    end
+    if user_input == "p" || user_input == "play"
+      replay
+    else user_input == "q" || user_input == "quit"
       @message.quit
       exit
-    else
-      exit
     end
+  end
+
+  def replay
+    game = Game.new
+    @start_time
+    @message.play
+    game.play
   end
 
   def result
