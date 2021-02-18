@@ -41,7 +41,7 @@ class Turn
     puts "Congratulations! You guessed '#{@guess.join}'\nin #{@guess_count} guesses in #{@elapsed_time[0]} mins and #{@elapsed_time[1]} seconds.\nDo you want to play again or quit?"
     user_input = gets.chomp.downcase
     until user_input == "p" || user_input == "q" || user_input == "play" || user_input == "quit"
-      @message.input_invalid
+      @message.play_again_or_quit
       user_input = gets.chomp.downcase
     end
     if user_input == "p" || user_input == "play"
