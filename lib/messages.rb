@@ -86,4 +86,12 @@ class Messages
     from the R, B, G, Y song. (Song doesn't exist but I can do what I want. Only
     R, B, G, Y this time. And only 1, 2, 3, 4 long.)"
   end
+
+  def play_again_or_quit
+    messages = ["    There is no such option. Please select (p)lay to give it another whirl and crack
+    another code or (q)uit while you're ahead. It's a very nice choose-your-own-adventure,
+    really.", "Nope. You have to choose to (p)lay again or (q)uit.", "    (P)lay again or (q)uit.
+    No other choice, my friend."]
+    puts messages.sample
+  end
 end
